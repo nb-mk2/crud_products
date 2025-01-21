@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Products List</h1>
+    <h1>Lista de Productos</h1>
     <a href="{{route('products.create')}}" class="btn btn-primary"><i class="bi bi-plus"></i>Agregar Producto</a>
 <table class="table">
     <thead>
@@ -19,17 +19,17 @@
 @foreach ($products as $product)
     <tr>
         <th scope="row">{{$product->id}}</th>
-        <td>{{product->name}}</td>
-        <td>
-            <a href ="{{route('products.show', $product->id)}}" class="btn btn-primary">Details</a>
-            <a href ="{{route('products.edit', $product->id)}}" class="btn btn-warning">Edit</a>
-            <form action="{{route('products.destroy', $product->id)}}" method="POST">
-                @csrf //Mecanimos de seguridad de organismo de Laravel 
+        <td>{{$product->name}}</td>
+        <td class="d-flex justify-content-start gap-2">
+            <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Detalle</a>
+            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Editar</a>
+            <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline;">
+                @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form> 
-
+                <button type="submit" class="btn btn-danger">Borrar</button>
+            </form>
         </td>
+        
     </tr>
 @endforeach
     </tbody>
