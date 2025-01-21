@@ -6,6 +6,11 @@
 
 <div class="container">
     <h1>Lista de Productos</h1>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <a href="{{route('products.create')}}" class="btn btn-primary"><i class="bi bi-plus"></i>Agregar Producto</a>
 <table class="table">
     <thead>
