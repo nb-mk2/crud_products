@@ -41,20 +41,30 @@ class ProductController extends Controller
     }
 
     
-    public function edit(string $id)
+    public function edit(Products $products)
     {
-        //
+        return view('products.edit', compact('products'));
     }
 
    
-    public function update(Request $request, string $id)
+    public function update(Request $request, Products $products)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric|min:0',
+        ]);
+
+        $products->update($request->all());
+
+        return redirect()->route('products.index')->with('success', 'Producto actualizado con éxito!');
     }
 
-    
-    public function destroy(string $id)
+
+    public function destroy(Products $products)
     {
-        //
+        $products->delete();
+
+        return redirect()->route('products.index')->with('success', 'Producto eliminado con éxito!');
     }
 }
